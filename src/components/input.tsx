@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useId, type ComponentProps } from "react";
 
-type InputProps = {
+export type InputProps = {
   labelText?: string;
   errorMessage?: string;
 } & ComponentProps<"input">;
@@ -17,6 +17,7 @@ export const Input = ({
   const isInvalid = !!errorMessage;
   const ariaLabel = labelText || props.placeholder;
   const describedBy = isInvalid ? errorId : undefined;
+  console.log(describedBy);
 
   const inputClass = clsx(
     "py-3 px-4 rounded-lg ring-border-gray bg-white ring-2 transition outline-none text-dark-gray",
@@ -48,7 +49,7 @@ export const Input = ({
       />
 
       {errorMessage && (
-        <p role="alert" className="text-sm text-red-500">
+        <p id={errorId} role="alert" className="text-sm text-red-500">
           {errorMessage}
         </p>
       )}
