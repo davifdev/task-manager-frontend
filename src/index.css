@@ -21,8 +21,8 @@
   --color-border-gray: #f4f4f5;
 }
 
-@layer {
-  base {
+@layer base {
+  body {
     font-family: var(--font-poppins);
     background-color: var(--bg-color-gray);
   }

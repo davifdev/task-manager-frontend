@@ -1,5 +1,12 @@
+import { Button } from "../components/button";
+
 const Dashboard = () => {
-  return <h2>Dashboard Page</h2>;
+  return (
+    <div>
+      <h2 className="text-primary">Dashboard Page</h2>
+      <Button type="submit">Entrar</Button>
+    </div>
+  );
 };
 
 export default Dashboard;
