@@ -17,13 +17,13 @@ export const Button = ({
   const buttonVariants: Record<ButtonVariants, string> = {
     default: "bg-primary text-white",
     ghost: "bg-transparent text-dark-gray",
-    danger: "bg-danger text-white ",
+    danger: "bg-danger text-white",
   };
 
   const buttonSizes: Record<ButtonSizes, string> = {
-    sm: "text-sm  px-3 py-1",
-    md: "text-base  px-4 py-2",
-    lg: "text-base  px-9 py-2",
+    sm: "text-sm px-3 py-1",
+    md: "text-base px-4 py-2",
+    lg: "text-base px-9 py-2",
   };
 
   const buttonClass = clsx(
