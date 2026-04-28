@@ -2,14 +2,14 @@ import clsx from "clsx";
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
-type SidebarButtonProps = {
+export type SidebarButtonProps = {
   children: ReactNode;
   href: string;
 };
 
 const SidebarButton = ({ children, href }: SidebarButtonProps) => {
   const sidebarButtonClass =
-    "flex items-center gap-2 rounded-lg px-6 py-3 text-sm";
+    "flex items-center gap-2 rounded-lg px-6 py-3 text-sm transition hover:bg-primary-opacity hover:text-primary";
 
   const defaultVariant = clsx(
     sidebarButtonClass,
@@ -18,7 +18,7 @@ const SidebarButton = ({ children, href }: SidebarButtonProps) => {
 
   const ghostVariant = clsx(
     sidebarButtonClass,
-    "bg-dark-blue-opacity text-dark-blue"
+    "bg-transparent text-dark-blue"
   );
 
   return (
