@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ExternalLinkIcon, Trash2Icon } from "lucide-react";
 import { useId } from "react";
 
-type TaskVariants = "isPending" | "isProgress" | "isCompleted";
+export type TaskVariants = "isPending" | "isProgress" | "isCompleted";
 type TaskItemProps = {
   title?: string;
   time?: string;
@@ -31,7 +31,7 @@ const TaskItem = ({ status = "isPending" }: TaskItemProps) => {
   const checkId = `${id}-checked`;
 
   return (
-    <div className={taskItemClass}>
+    <div className={taskItemClass} role="task-item">
       <div className="flex items-center gap-3">
         <div
           className={`${checkedVariants[status]} flex h-6 w-6 cursor-pointer items-center justify-center rounded-md`}
