@@ -45,7 +45,7 @@ describe("<Input />", () => {
     });
     it("renderiza o componente sem label", async () => {
       const element = input({ labelText: undefined });
-      const notLabel = screen.queryByRole("any_label");
+      const notLabel = screen.queryByText("any_label");
 
       expect(element).toBeInTheDocument();
       expect(notLabel).not.toBeInTheDocument();

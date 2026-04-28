@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useId, type ComponentProps } from "react";
 
-type InputSelectProps = {
+export type InputSelectProps = {
   labelText?: string;
   errorMessage?: string;
 } & ComponentProps<"select">;
@@ -52,7 +52,7 @@ export const InputSelect = ({
       </select>
 
       {errorMessage && (
-        <p role="alert" className="text-sm text-red-500">
+        <p id={errorId} role="alert" className="text-sm text-red-500">
           {errorMessage}
         </p>
       )}
