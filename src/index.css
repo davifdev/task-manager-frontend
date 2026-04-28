@@ -19,6 +19,9 @@
   --color-process: #ffaa04;
   --color-danger: #ef4444;
   --color-border-gray: #f4f4f5;
+  --color-primary-opacity: --alpha(#00abd5 / 10%);
+  --color-process-opacity: --alpha(#ffaa04 / 10%);
+  --color-dark-blue-opacity: --alpha(#35383e / 10%);
 }
 
 @layer base {
