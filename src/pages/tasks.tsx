@@ -1,14 +1,10 @@
-import { ListChecksIcon } from "lucide-react";
-import SidebarButton from "../components/sidebar-button";
+import TaskItem from "../components/task-item";
 
 const Tasks = () => {
   return (
     <>
       <h2>Tasks Page</h2>
-      <SidebarButton href="/tasks">
-        <ListChecksIcon />
-        Minhas Tarefas
-      </SidebarButton>
+      <TaskItem status="inProgress" />
     </>
   );
 };
