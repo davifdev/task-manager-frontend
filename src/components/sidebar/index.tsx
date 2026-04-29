@@ -1,6 +1,6 @@
 import { HouseIcon, ListChecksIcon, LogOutIcon } from "lucide-react";
-import SidebarButton from "./sidebar-button";
-import { Button } from "./button";
+import { Button } from "../button";
+import SidebarButton from "../sidebar-button";
 
 export const Sidebar = () => {
   return (

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { InputSelect, type InputSelectProps } from "./input-select";
+import { InputSelect, type InputSelectProps } from ".";
 import userEvent from "@testing-library/user-event";
 
 type Props = Partial<InputSelectProps>;

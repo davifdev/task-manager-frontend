@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import TaskItem, { type TaskVariants } from "./task-item";
+import type { TaskVariants } from ".";
+import TaskItem from ".";
 
 const makeTaskItem = (status: TaskVariants) => {
   return <TaskItem status={status} />;

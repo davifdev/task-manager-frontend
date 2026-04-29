@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "../pages/dashboard";
-import Register from "../pages/register";
-import Login from "../pages/login";
-import Tasks from "../pages/tasks";
+
 import { Sidebar } from "../components/sidebar";
-import EditTask from "../pages/edit-task";
+import { Login } from "../pages/login";
+import { Register } from "../pages/register";
+import { Dashboard } from "../pages/dashboard";
+import { Tasks } from "../pages/tasks";
+import { EditTask } from "../pages/edit-task";
 
 const MainRouter = () => {
   return (

@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Button } from "./button";
+
 import { userEvent } from "@testing-library/user-event";
+import { Button } from ".";
 
 const props = {
   VARIANT_DEFAULT: "bg-primary text-white",

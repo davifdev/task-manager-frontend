@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { Input, type InputProps } from "./input";
+
 import userEvent from "@testing-library/user-event";
+import { Input, type InputProps } from ".";
 
 type Props = Partial<InputProps>;
 const makeInput = (props: Props = {}) => {

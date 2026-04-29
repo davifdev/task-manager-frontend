@@ -6,7 +6,7 @@ import {
   SummaryIcon,
   SummarySubtitle,
   SummaryTitle,
-} from "./summary-card";
+} from "../summary-card";
 
 export const SummaryItems = () => {
   return (

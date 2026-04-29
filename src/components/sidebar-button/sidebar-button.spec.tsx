@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import SidebarButton from "./sidebar-button";
+
 import { MemoryRouter } from "react-router-dom";
+import SidebarButton from ".";
 
 const makeSidebarButton = () => {
   return (

@@ -4,7 +4,7 @@ import TaskItem from "../components/task-item";
 import TaskPeriod from "../components/taskPeriod";
 import { Header } from "../components/header";
 
-const Tasks = () => {
+export const Tasks = () => {
   return (
     <section className="w-full space-y-6 px-8 pt-14">
       <Header title="Minhas Tarefas" subtitle="Minhas Tarefas" />
@@ -46,5 +46,3 @@ const Tasks = () => {
     </section>
   );
 };
-
-export default Tasks;

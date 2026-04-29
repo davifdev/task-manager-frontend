@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "./button";
+import { Button } from "../button";
 import { PlusIcon, Trash2Icon } from "lucide-react";
-import { AddTaskDialog } from "./add-task-dialog";
+import { AddTaskDialog } from "../add-task-dialog";
 
 type HeaderProps = {
   title: string;

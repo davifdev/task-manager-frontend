@@ -1,9 +1,9 @@
 import { Header } from "../components/header";
 
-import { SummaryItems } from "../components/summary-items";
+import { SummaryItems } from "../components/summary-card-items";
 import TaskItem from "../components/task-item";
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <section className="w-full space-y-6 px-8 pt-14">
       <Header title="Início" subtitle="Início" />
@@ -34,5 +34,3 @@ const Dashboard = () => {
     </section>
   );
 };
-
-export default Dashboard;

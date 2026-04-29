@@ -3,7 +3,7 @@ import { Button } from "../components/button";
 import { Input } from "../components/input";
 import { InputSelect } from "../components/input-select";
 
-const EditTask = () => {
+export const EditTask = () => {
   return (
     <section className="w-full space-y-6 px-8 pt-14">
       <div className="flex items-end justify-between">
@@ -70,5 +70,3 @@ const EditTask = () => {
     </section>
   );
 };
-
-export default EditTask;

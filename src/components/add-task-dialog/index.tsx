@@ -1,6 +1,6 @@
-import { Button } from "./button";
-import { Input } from "./input";
-import { InputSelect } from "./input-select";
+import { Button } from "../button";
+import { Input } from "../input";
+import { InputSelect } from "../input-select";
 
 type AddTaskDialogProps = {
   isDialogOpen: boolean;
