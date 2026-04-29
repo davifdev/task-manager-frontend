@@ -7,6 +7,7 @@ const props = {
   VARIANT_DEFAULT: "bg-primary text-white",
   VARIANT_GHOST: "bg-transparent text-dark-gray",
   VARIANT_DANGER: "bg-danger text-white",
+  VARIANT_CANCEL: "bg-light-gray text-dark-blue",
   SIZE_SM: "text-sm px-3 py-1",
   SIZE_MD: "text-base px-4 py-2",
   SIZE_LG: "text-base px-9 py-2",
@@ -73,6 +74,15 @@ describe("<Button />", () => {
       });
 
       expect(button).toHaveClass(props.VARIANT_DANGER);
+    });
+    it("verifica se cancel aplica a cor correta", async () => {
+      render(<Button variant="cancel">Criar tarefa</Button>);
+
+      const button = screen.getByRole("button", {
+        name: /criar tarefa/i,
+      });
+
+      expect(button).toHaveClass(props.VARIANT_CANCEL);
     });
   });
   describe("size (tamanho)", () => {
