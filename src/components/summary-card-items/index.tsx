@@ -1,4 +1,4 @@
-import { LayoutListIcon, ListCheckIcon, LoaderCircle } from "lucide-react";
+import { LayoutListIcon, ListCheckIcon, LoaderCircleIcon } from "lucide-react";
 import {
   SummaryCard,
   SummaryContent,
@@ -10,7 +10,7 @@ import {
 
 export const SummaryItems = () => {
   return (
-    <div className="grid grid-cols-4 gap-8">
+    <div className="grid grid-cols-4 gap-8" role="summary-card">
       <SummaryCard>
         <SummaryContent>
           <SummaryHeader>
@@ -38,7 +38,7 @@ export const SummaryItems = () => {
           <SummaryHeader>
             <SummarySubtitle>1</SummarySubtitle>
             <SummaryIcon>
-              <LoaderCircle />
+              <LoaderCircleIcon />
             </SummaryIcon>
           </SummaryHeader>
           <SummaryTitle>Tarefas em andamento</SummaryTitle>
@@ -49,7 +49,7 @@ export const SummaryItems = () => {
           <SummaryHeader>
             <SummarySubtitle>0</SummarySubtitle>
             <SummaryIcon>
-              <LoaderCircle />
+              <LoaderCircleIcon />
             </SummaryIcon>
           </SummaryHeader>
           <SummaryTitle>Tarefas não iniciadas</SummaryTitle>
