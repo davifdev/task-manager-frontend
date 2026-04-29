@@ -1,11 +1,13 @@
-import { Button } from "../components/button";
+import Header from "../components/header";
+
+import { SummaryItems } from "../components/summary-items";
 
 const Dashboard = () => {
   return (
-    <div>
-      <h2 className="text-primary">Dashboard Page</h2>
-      <Button type="submit">Entrar</Button>
-    </div>
+    <section className="w-full space-y-6 px-8 pt-14">
+      <Header title="Início" subtitle="Início" />
+      <SummaryItems />
+    </section>
   );
 };
 
