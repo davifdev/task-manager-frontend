@@ -1,25 +1,49 @@
-import type { ReactNode } from "react";
+import { useState } from "react";
+import { Button } from "./button";
+import { PlusIcon, Trash2Icon } from "lucide-react";
+import { AddTaskDialog } from "./add-task-dialog";
 
 type HeaderProps = {
-  children: ReactNode;
+  title: string;
+  subtitle: string;
 };
 
-export const Header = ({ children }: HeaderProps) => {
-  return <header className="flex items-end justify-between">{children}</header>;
-};
+export const Header = ({ title, subtitle }: HeaderProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-export const HeaderLeft = ({ children }: HeaderProps) => {
-  return <div className="flex flex-col gap-1.5">{children}</div>;
-};
+  const handleToggleDialog = () => {
+    setIsDialogOpen(!isDialogOpen);
+  };
 
-export const HeaderRight = ({ children }: HeaderProps) => {
-  return <div className="flex items-center gap-2.5">{children}</div>;
-};
-
-export const HeaderTitle = ({ children }: HeaderProps) => {
-  return <h2 className="text-dark-blue text-2xl font-semibold">{children}</h2>;
-};
-
-export const HeaderSubtitle = ({ children }: HeaderProps) => {
-  return <p className="text-primary text-sm font-semibold">{children}</p>;
+  return (
+    <header className="flex items-end justify-between">
+      <div className="flex flex-col gap-1.5">
+        <p className="text-primary text-sm font-semibold">{subtitle}</p>
+        <h2 className="text-dark-blue text-2xl font-semibold">{title}</h2>
+      </div>
+      <div className="flex items-center gap-2.5">
+        <Button
+          variant="ghost"
+          aria-label="Deletar todas as tarefas"
+          title="Deletar todas as tarefas"
+        >
+          Limpar tarefas
+          <Trash2Icon size={18} />
+        </Button>
+        <Button
+          variant="default"
+          aria-label="Criar uma nova tarefa"
+          title="Criar uma nova tarefa"
+          onClick={handleToggleDialog}
+        >
+          Nova tarefa
+          <PlusIcon size={18} />
+        </Button>
+      </div>
+      <AddTaskDialog
+        isDialogOpen={isDialogOpen}
+        handleToggleDialog={handleToggleDialog}
+      />
+    </header>
+  );
 };

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 
-type ButtonVariants = "default" | "ghost" | "danger";
+type ButtonVariants = "default" | "ghost" | "danger" | "cancel";
 type ButtonSizes = "sm" | "md" | "lg";
 
 type ButtonProps = {
@@ -18,6 +18,7 @@ export const Button = ({
     default: "bg-primary text-white",
     ghost: "bg-transparent text-dark-gray",
     danger: "bg-danger text-white",
+    cancel: "bg-light-gray text-dark-blue",
   };
 
   const buttonSizes: Record<ButtonSizes, string> = {
