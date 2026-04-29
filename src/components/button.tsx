@@ -29,7 +29,7 @@ export const Button = ({
   const buttonClass = clsx(
     buttonVariants[variant],
     buttonSizes[size],
-    "flex items-center rounded-sm justify-center cursor-pointer transiton disabled:cursor-not-allowed disabled:opacity-35, font-semibold hover:opacity-80",
+    "flex items-center rounded-sm justify-center cursor-pointer gap-1 transiton disabled:cursor-not-allowed disabled:opacity-35, font-semibold hover:opacity-80",
     props.className
   );
 
