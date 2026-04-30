@@ -1,11 +1,15 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+export const authApi = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
 export const api = axios.create({
   baseURL: "http://localhost:3000",
 });
 
-api.interceptors.request.use((config) => {
+authApi.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     config.headers.Authorization = `Beare ${accessToken}`;
@@ -13,7 +17,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
+authApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -25,15 +29,17 @@ api.interceptors.response.use(
         if (!refreshToken) {
           return Promise.reject(error);
         }
-        const response = await api.post("/refresh-token", { refreshToken });
+        const response = await authApi.post("/refresh-token", { refreshToken });
         const { accessToken: newAccessToken } = response.data;
         localStorage.setItem("accessToken", newAccessToken);
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        return api(originalRequest);
+        return authApi(originalRequest);
       }
     } catch (error) {
       localStorage.removeItem("accessToken");
       return Promise.reject(error);
     }
+
+    return Promise.reject(error);
   }
 );
