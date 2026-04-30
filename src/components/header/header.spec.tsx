@@ -50,8 +50,8 @@ describe("<Header />", () => {
     render(<Header {...defaultProps} />);
 
     const openButton = screen.getByRole("button", { name: /nova tarefa/i });
-
     fireEvent.click(openButton);
+
     expect(screen.queryByTestId("mock-dialog")).toBeInTheDocument();
 
     const closeButton = screen.getByText("Fechar Dialog");
