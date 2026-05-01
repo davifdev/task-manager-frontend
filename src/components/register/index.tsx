@@ -6,8 +6,15 @@ import {
   registerUserSchema,
   type RegisterUserSchemaType,
 } from "../../schemas/user/register.schema";
+import { useSignUp } from "../../hooks/user/useAuth";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../store/reducers/auth/auth.slice";
 
 export const Register = () => {
+  const [accessToken, setAccessToken] = useState<string>("");
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -22,9 +29,24 @@ export const Register = () => {
     },
   });
 
+  const signUpMutation = useSignUp();
+
   const onSubmit = async (data: RegisterUserSchemaType) => {
-    console.log(data);
+    const response = await signUpMutation.mutateAsync(data);
+    const accessToken = response.accessToken;
+    setAccessToken(accessToken);
+
+    dispatch(
+      signUp({
+        email: response.email,
+        username: response.username,
+      })
+    );
   };
+
+  useEffect(() => {
+    localStorage.setItem("accessToken", accessToken);
+  }, [accessToken]);
 
   console.log(errors);
   return (
