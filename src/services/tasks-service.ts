@@ -1,5 +1,12 @@
+import { authApi } from "../lib/axios";
+
 export const TasksService = {
-  listTasks: async () => {},
+  getTasks: async () => {
+    const response = await authApi.get("/tasks");
+    const tasks = await response.data;
+    console.log(tasks);
+  },
+
   create: async () => {},
   update: async () => {},
   updateStatus: async () => {},
