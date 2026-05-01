@@ -16,3 +16,5 @@ export const registerUserSchema = z
     (data) => data.confirmPassword === data.password,
     "As senhas não se coencidem"
   );
+
+export type RegisterUserSchemaType = z.infer<typeof registerUserSchema>;
