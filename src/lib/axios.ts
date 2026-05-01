@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { UserService } from "../services/user-service";
 
 export const authApi = axios.create({
   baseURL: "http://localhost:3000",
@@ -29,7 +30,7 @@ authApi.interceptors.response.use(
         if (!refreshToken) {
           return Promise.reject(error);
         }
-        const response = await authApi.post("/refresh-token", { refreshToken });
+        const response = await UserService.refreshToken(refreshToken);
         const { accessToken: newAccessToken } = response.data;
         localStorage.setItem("accessToken", newAccessToken);
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;

@@ -22,7 +22,7 @@ export const Register = () => {
     },
   });
 
-  const onSubmit = (data: RegisterUserSchemaType) => {
+  const onSubmit = async (data: RegisterUserSchemaType) => {
     console.log(data);
   };
 
