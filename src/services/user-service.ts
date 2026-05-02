@@ -28,5 +28,13 @@ export const UserService = {
     return response;
   },
 
-  logout: async () => {},
+  getUser: async () => {
+    const response = await authApi.get("/get-user");
+    return response;
+  },
+
+  logout: async () => {
+    const response = await authApi.post("/logout");
+    return response;
+  },
 };

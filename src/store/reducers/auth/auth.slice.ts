@@ -15,7 +15,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     signUp: (state, action: PayloadAction<AuthUser>) => {
-      console.log("Cheguei aqui");
       const user = action.payload;
       state.email = user.email;
       state.username = user.username;
@@ -25,9 +24,14 @@ export const authSlice = createSlice({
       state.email = user.email;
       state.username = user.username;
     },
+    userUpdate: (state, action: PayloadAction<AuthUser>) => {
+      const user = action.payload;
+      state.email = user.email;
+      state.username = user.username;
+    },
   },
 });
 
-export const { signUp, signIn } = authSlice.actions;
+export const { signUp, signIn, userUpdate } = authSlice.actions;
 
 export default authSlice.reducer;

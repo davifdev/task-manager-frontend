@@ -6,8 +6,14 @@ import {
   loginUserSchema,
   type LoginUserSchemaType,
 } from "../../schemas/user/login.schema";
+import { useSignIn } from "../../hooks/user/useAuth";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../store/reducers/auth/auth.slice";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const signInMutation = useSignIn();
+
   const {
     register,
     handleSubmit,
@@ -20,11 +26,17 @@ export const Login = () => {
     },
   });
 
-  const onSubmit = (data: LoginUserSchemaType) => {
-    console.log(data);
-  };
+  const onSubmit = async (data: LoginUserSchemaType) => {
+    const response = await signInMutation.mutateAsync(data);
+    localStorage.setItem("accessToken", response.accessToken);
 
-  console.log(errors);
+    dispatch(
+      signIn({
+        email: response.email,
+        username: response.username,
+      })
+    );
+  };
 
   return (
     <form

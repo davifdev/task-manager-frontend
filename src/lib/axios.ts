@@ -13,7 +13,7 @@ export const api = axios.create({
 authApi.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
-    config.headers.Authorization = `Beare ${accessToken}`;
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;
 });
@@ -37,6 +37,7 @@ authApi.interceptors.response.use(
         return authApi(originalRequest);
       }
     } catch (error) {
+      console.log("removi o token");
       localStorage.removeItem("accessToken");
       return Promise.reject(error);
     }

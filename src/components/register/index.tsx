@@ -7,12 +7,12 @@ import {
   type RegisterUserSchemaType,
 } from "../../schemas/user/register.schema";
 import { useSignUp } from "../../hooks/user/useAuth";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/reducers/auth/auth.slice";
+import { useAppSelector } from "../../hooks/redux/useAppSelector";
 
 export const Register = () => {
-  const [accessToken, setAccessToken] = useState<string>("");
+  const user = useAppSelector((state) => state.AuthUser);
   const dispatch = useDispatch();
 
   const {
@@ -33,8 +33,7 @@ export const Register = () => {
 
   const onSubmit = async (data: RegisterUserSchemaType) => {
     const response = await signUpMutation.mutateAsync(data);
-    const accessToken = response.accessToken;
-    setAccessToken(accessToken);
+    localStorage.setItem("accessToken", response.accessToken);
 
     dispatch(
       signUp({
@@ -44,11 +43,7 @@ export const Register = () => {
     );
   };
 
-  useEffect(() => {
-    localStorage.setItem("accessToken", accessToken);
-  }, [accessToken]);
-
-  console.log(errors);
+  console.log(user);
   return (
     <form
       className="w-full max-w-2xl space-y-4"

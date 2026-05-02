@@ -1,8 +1,18 @@
 import { HouseIcon, ListChecksIcon, LogOutIcon } from "lucide-react";
 import { Button } from "../button";
 import SidebarButton from "../sidebar-button";
+import { useNavigate } from "react-router-dom";
+import { UserService } from "../../services/user-service";
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleClickLogout = async () => {
+    await UserService.logout();
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <aside className="flex h-screen w-full max-w-68 flex-col justify-between bg-white">
       <div className="space-y-2">
@@ -28,7 +38,7 @@ export const Sidebar = () => {
       </div>
 
       <div className="p-4">
-        <Button className="w-full" variant="danger">
+        <Button className="w-full" variant="danger" onClick={handleClickLogout}>
           <LogOutIcon size={18} /> Sair
         </Button>
       </div>

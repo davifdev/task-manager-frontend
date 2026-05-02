@@ -17,7 +17,6 @@ export const Input = ({
   const isInvalid = !!errorMessage;
   const ariaLabel = labelText || props.placeholder;
   const describedBy = isInvalid ? errorId : undefined;
-  console.log(describedBy);
 
   const inputClass = clsx(
     "py-3 px-4 rounded-lg ring-border-gray bg-white ring-2 transition outline-none text-dark-gray",
