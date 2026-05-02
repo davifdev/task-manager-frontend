@@ -1,10 +1,26 @@
 import { authApi } from "../lib/axios";
 
+type Task = {
+  title: string;
+  time: string;
+  status: string;
+  description: string;
+};
+
+type TaskDTO = {
+  morning: Task[];
+  afternoon: Task[];
+  evening: Task[];
+};
+
 export const TasksService = {
-  getTasks: async () => {
+  getTasks: async (): Promise<TaskDTO> => {
     const response = await authApi.get("/tasks");
-    const tasks = await response.data;
-    console.log(tasks);
+    return {
+      morning: response.data.morning,
+      afternoon: response.data.afternonn,
+      evening: response.data.evening,
+    };
   },
 
   create: async () => {},

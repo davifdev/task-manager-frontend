@@ -6,14 +6,26 @@ import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
 import { useAppSelector } from "../hooks/redux/useAppSelector";
 import { Navigate } from "react-router-dom";
+import { useGetTasks } from "../hooks/tasks/useTasks";
 
 export const Tasks = () => {
   const user = useAppSelector((state) => state.AuthUser);
   const isAuth = user.email.length > 0;
 
+  const tasks = useGetTasks();
+
   if (!isAuth) {
     return <Navigate to="/" />;
   }
+
+  const tasksMorning = tasks.data?.morning;
+  const tasksAfternoon = tasks.data?.afternoon;
+  const tasksEvening = tasks.data?.evening;
+
+  console.log(tasksMorning);
+  console.log(tasksAfternoon);
+  console.log(tasksEvening);
+
   return (
     <div className="flex w-full">
       <Sidebar />
