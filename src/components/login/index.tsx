@@ -50,6 +50,7 @@ export const Login = () => {
         errorMessage={errors.email?.message}
       />
       <Input
+        type="password"
         labelText="Senha"
         placeholder="Digite sua senha"
         {...register("password")}

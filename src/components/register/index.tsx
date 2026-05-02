@@ -62,12 +62,14 @@ export const Register = () => {
         errorMessage={errors.email?.message}
       />
       <Input
+        type="password"
         labelText="Senha"
         placeholder="Digite sua senha"
         {...register("password")}
         errorMessage={errors.password?.message}
       />
       <Input
+        type="password"
         labelText="Confirmar Senha"
         placeholder="Digite sua confirmação senha"
         {...register("confirmPassword")}
