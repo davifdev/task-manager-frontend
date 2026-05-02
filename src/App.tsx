@@ -1,14 +1,18 @@
 import { useEffect } from "react";
+
 import MainRouter from "./routes/main-router";
 import { UserService } from "./services/user-service";
-import { userUpdate } from "./store/reducers/auth/auth.slice";
 import { useDispatch } from "react-redux";
+import { userUpdate } from "./store/reducers/auth/auth.slice";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUser = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) return;
+
       const user = await UserService.getUser();
 
       dispatch(

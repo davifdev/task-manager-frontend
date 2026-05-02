@@ -1,16 +1,24 @@
 import { HouseIcon, ListChecksIcon, LogOutIcon } from "lucide-react";
 import { Button } from "../button";
 import SidebarButton from "../sidebar-button";
-import { useNavigate } from "react-router-dom";
+
 import { UserService } from "../../services/user-service";
+import { useDispatch } from "react-redux";
+import { userUpdate } from "../../store/reducers/auth/auth.slice";
 
 export const Sidebar = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClickLogout = async () => {
     await UserService.logout();
+    dispatch(
+      userUpdate({
+        email: "",
+        username: "",
+      })
+    );
     localStorage.clear();
-    navigate("/");
+    window.location.reload();
   };
 
   return (

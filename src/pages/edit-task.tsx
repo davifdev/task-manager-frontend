@@ -4,7 +4,16 @@ import { Input } from "../components/input";
 import { InputSelect } from "../components/input-select";
 import { Sidebar } from "../components/sidebar";
 
+import { useAppSelector } from "../hooks/redux/useAppSelector";
+import { Navigate } from "react-router-dom";
+
 export const EditTask = () => {
+  const user = useAppSelector((state) => state.AuthUser);
+  const isAuth = user.email.length > 0;
+
+  if (!isAuth) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="flex w-full">
       <Sidebar />

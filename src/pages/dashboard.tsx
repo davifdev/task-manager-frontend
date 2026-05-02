@@ -4,7 +4,17 @@ import { Sidebar } from "../components/sidebar";
 import { SummaryItems } from "../components/summary-card-items";
 import TaskItem from "../components/task-item";
 
+import { useAppSelector } from "../hooks/redux/useAppSelector";
+import { Navigate } from "react-router-dom";
+
 export const Dashboard = () => {
+  const user = useAppSelector((state) => state.AuthUser);
+  const isAuth = user.email.length > 0;
+
+  if (!isAuth) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="flex">
       <Sidebar />
