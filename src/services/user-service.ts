@@ -23,11 +23,6 @@ export const UserService = {
     };
   },
 
-  refreshToken: async (refreshToken: string) => {
-    const response = await authApi.post("/refresh-token", { refreshToken });
-    return response;
-  },
-
   getUser: async () => {
     const response = await authApi.get("/get-user");
     return response;

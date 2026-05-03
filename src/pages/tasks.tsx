@@ -14,18 +14,13 @@ export const Tasks = () => {
 
   const tasks = useGetTasks();
 
-  if (!isAuth) {
-    return <Navigate to="/" />;
-  }
-
   const tasksMorning = tasks.data?.morning;
   const tasksAfternoon = tasks.data?.afternoon;
   const tasksEvening = tasks.data?.evening;
 
-  console.log(tasksMorning);
-  console.log(tasksAfternoon);
-  console.log(tasksEvening);
-
+  if (!isAuth) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="flex w-full">
       <Sidebar />
@@ -38,9 +33,9 @@ export const Tasks = () => {
               Manhã
             </TaskPeriod>
             <div className="space-y-3">
-              <TaskItem status="isCompleted" />
-              <TaskItem status="isCompleted" />
-              <TaskItem status="isCompleted" />
+              {tasksMorning?.map((task) => (
+                <TaskItem tasks={task} key={task.id} />
+              ))}
             </div>
           </div>
           <div className="space-y-3">
@@ -49,9 +44,9 @@ export const Tasks = () => {
               Tarde
             </TaskPeriod>
             <div className="space-y-3">
-              <TaskItem status="isProgress" />
-              <TaskItem status="isProgress" />
-              <TaskItem status="isProgress" />
+              {tasksAfternoon?.map((task) => (
+                <TaskItem tasks={task} key={task.id} />
+              ))}
             </div>
           </div>
           <div className="space-y-3">
@@ -60,9 +55,9 @@ export const Tasks = () => {
               Noite
             </TaskPeriod>
             <div className="space-y-3">
-              <TaskItem status="isPending" />
-              <TaskItem status="isPending" />
-              <TaskItem status="isPending" />
+              {tasksEvening?.map((task) => (
+                <TaskItem tasks={task} key={task.id} />
+              ))}
             </div>
           </div>
         </div>

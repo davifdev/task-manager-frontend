@@ -2,7 +2,6 @@ import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
 
 import { SummaryItems } from "../components/summary-card-items";
-import TaskItem from "../components/task-item";
 
 import { useAppSelector } from "../hooks/redux/useAppSelector";
 import { Navigate } from "react-router-dom";
@@ -29,13 +28,7 @@ export const Dashboard = () => {
                 Resumo das tarefas disponíveis
               </p>
             </div>
-            <div className="space-y-3">
-              <TaskItem status="isPending" />
-              <TaskItem status="isPending" />
-              <TaskItem status="isPending" />
-              <TaskItem status="isPending" />
-              <TaskItem status="isPending" />
-            </div>
+            <div className="space-y-3"></div>
           </div>
           <div className="flex items-center justify-center rounded-lg bg-white p-6">
             <p className="text-dark-gray text-center">

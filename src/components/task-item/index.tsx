@@ -2,28 +2,32 @@ import clsx from "clsx";
 import { ExternalLinkIcon, Trash2Icon } from "lucide-react";
 import { useId } from "react";
 
-export type TaskVariants = "isPending" | "isProgress" | "isCompleted";
-type TaskItemProps = {
-  title?: string;
-  time?: string;
-  status: TaskVariants;
+type TaskType = {
+  id: string;
+  title: string;
+  time: string;
+  status: string;
 };
 
-const TaskItem = ({ status = "isPending" }: TaskItemProps) => {
-  const tasksVariants: Record<TaskVariants, string> = {
-    isPending: "bg-dark-blue-opacity text-dark-blue",
-    isProgress: "bg-process-opacity text-process",
-    isCompleted: "bg-primary-opacity text-primary",
+type TaskItemProps = {
+  tasks: TaskType;
+};
+
+const TaskItem = ({ tasks }: TaskItemProps) => {
+  const tasksVariants: Record<string, string> = {
+    pending: "bg-dark-blue-opacity text-dark-blue",
+    in_progress: "bg-process-opacity text-process",
+    completed: "bg-primary-opacity text-primary",
   };
 
-  const checkedVariants: Record<TaskVariants, string> = {
-    isPending: "bg-dark-blue",
-    isProgress: "bg-process",
-    isCompleted: "bg-primary",
+  const checkedVariants: Record<string, string> = {
+    pending: "bg-dark-blue",
+    in_progress: "bg-process",
+    completed: "bg-primary",
   };
 
   const taskItemClass = clsx(
-    tasksVariants[status],
+    tasksVariants[tasks?.status],
     "flex items-center justify-between rounded-lg p-3"
   );
 
@@ -34,7 +38,7 @@ const TaskItem = ({ status = "isPending" }: TaskItemProps) => {
     <div className={taskItemClass} role="task-item">
       <div className="flex items-center gap-3">
         <div
-          className={`${checkedVariants[status]} flex h-6 w-6 cursor-pointer items-center justify-center rounded-md`}
+          className={`${checkedVariants[tasks?.status]} flex h-6 w-6 cursor-pointer items-center justify-center rounded-md`}
         >
           <input
             id={checkId}
@@ -42,7 +46,7 @@ const TaskItem = ({ status = "isPending" }: TaskItemProps) => {
             className="z-10 h-6 w-6 cursor-pointer rounded-md opacity-0"
           />
         </div>
-        <p role={checkId}>Ir para academia</p>
+        <p role={checkId}>{tasks?.title}</p>
       </div>
       <div className="flex items-center gap-2">
         <ExternalLinkIcon size={18} />

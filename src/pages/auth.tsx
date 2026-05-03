@@ -3,22 +3,21 @@ import { useState } from "react";
 import { Register } from "../components/register";
 import { Login } from "../components/login";
 import { useAppSelector } from "../hooks/redux/useAppSelector";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const Auth = () => {
   const [loginOrRegister, setLoginOrRegister] = useState(false);
   const user = useAppSelector((state) => state.AuthUser);
   const isAuth = user.email.length > 0;
-  const navigate = useNavigate();
 
   const handleToggleLoginOrRegister = () => {
     setLoginOrRegister(!loginOrRegister);
   };
 
   if (isAuth) {
-    navigate("/dashboard");
-    return;
+    return <Navigate to="/dashboard" />;
   }
+
   return (
     <div className="flex h-screen w-screen gap-8">
       <div className="flex w-full max-w-4xl flex-col items-center justify-center">
