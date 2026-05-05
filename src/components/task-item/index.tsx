@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import { ExternalLinkIcon, Trash2Icon } from "lucide-react";
 import { useId } from "react";
+import { useDeleteTask } from "../../hooks/tasks/useTasks";
 
 type TaskType = {
-  id: string;
+  id?: string;
   title: string;
   time: string;
   status: string;
@@ -34,6 +35,13 @@ const TaskItem = ({ tasks }: TaskItemProps) => {
   const id = useId();
   const checkId = `${id}-checked`;
 
+  const deleteTaskMutation = useDeleteTask();
+
+  const handleDeleteClick = async () => {
+    console.log(tasks.id);
+    await deleteTaskMutation.mutateAsync(tasks.id!);
+  };
+
   return (
     <div className={taskItemClass} role="task-item">
       <div className="flex items-center gap-3">
@@ -50,7 +58,9 @@ const TaskItem = ({ tasks }: TaskItemProps) => {
       </div>
       <div className="flex items-center gap-2">
         <ExternalLinkIcon size={18} />
-        <Trash2Icon size={18} />
+        <button className="cursor-pointer" onClick={handleDeleteClick}>
+          <Trash2Icon size={18} />
+        </button>
       </div>
     </div>
   );

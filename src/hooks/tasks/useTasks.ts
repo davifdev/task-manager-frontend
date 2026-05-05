@@ -11,6 +11,16 @@ export const useGetTasks = () => {
   });
 };
 
+export const useGetAllTasks = () => {
+  return useQuery({
+    queryKey: ["get-all-tasks"],
+    queryFn: async () => {
+      const response = await TasksService.getAllTasks();
+      return response;
+    },
+  });
+};
+
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -19,6 +29,20 @@ export const useCreateTask = () => {
     mutationFn: async (data: any) => {
       const response = TasksService.create(data);
 
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-tasks"] });
+    },
+  });
+};
+
+export const useDeleteTask = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["delete-task"],
+    mutationFn: async (taskId: string) => {
+      const response = TasksService.delete(taskId);
       return response;
     },
     onSuccess: () => {

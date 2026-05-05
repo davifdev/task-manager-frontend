@@ -5,15 +5,20 @@ import { SummaryItems } from "../components/summary-card-items";
 
 import { useAppSelector } from "../hooks/redux/useAppSelector";
 import { Navigate } from "react-router-dom";
+import { useGetAllTasks } from "../hooks/tasks/useTasks";
+import TaskItem from "../components/task-item";
 
 export const Dashboard = () => {
   const user = useAppSelector((state) => state.AuthUser);
   const isAuth = user.email.length > 0;
 
+  const { data: tasks } = useGetAllTasks();
+
   if (!isAuth) {
     return <Navigate to="/" />;
   }
 
+  console.log();
   return (
     <div className="flex">
       <Sidebar />
@@ -28,7 +33,11 @@ export const Dashboard = () => {
                 Resumo das tarefas disponíveis
               </p>
             </div>
-            <div className="space-y-3"></div>
+            <div className="space-y-3">
+              {tasks?.map((task) => (
+                <TaskItem tasks={task} key={task.id} />
+              ))}
+            </div>
           </div>
           <div className="flex items-center justify-center rounded-lg bg-white p-6">
             <p className="text-dark-gray text-center">

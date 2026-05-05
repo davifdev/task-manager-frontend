@@ -2,6 +2,7 @@ import type { TaskDTO } from "../dtos/tasks/tasks.dto";
 import { authApi } from "../lib/axios";
 
 export type Task = {
+  id: string;
   title: string;
   time: string;
   status: string;
@@ -19,16 +20,34 @@ export const TasksService = {
     };
   },
 
+  getAllTasks: async (): Promise<Task[]> => {
+    const response = await authApi.get("/all-tasks");
+    return response.data;
+  },
+
   create: async (data: Task) => {
     const response = await authApi.post("/tasks", data);
     return response.data;
   },
 
-  update: async () => {},
+  update: async (taskId: string) => {
+    const response = await authApi.put(`/tasks/${taskId}`);
+    return response.data;
+  },
 
-  updateStatus: async () => {},
+  updateStatus: async (taskId: string) => {
+    const response = await authApi.patch(`/tasks/status/${taskId}`);
+    return response.data;
+  },
 
-  delete: async () => {},
+  delete: async (taskId: string) => {
+    const response = await authApi.delete(`/tasks/${taskId}`);
+    console.log(response);
+    return response.data;
+  },
 
-  deleteMany: async () => {},
+  deleteMany: async () => {
+    const response = await authApi.delete("/tasks");
+    return response.data;
+  },
 };
