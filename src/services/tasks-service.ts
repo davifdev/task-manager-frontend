@@ -12,7 +12,7 @@ export type Task = {
 export const TasksService = {
   getTasks: async (): Promise<TaskDTO> => {
     const response = await authApi.get("/tasks");
-
+    console.log(response.data);
     return {
       morning: response.data.morning,
       afternoon: response.data.afternoon,
@@ -35,8 +35,8 @@ export const TasksService = {
     return response.data;
   },
 
-  updateStatus: async (taskId: string) => {
-    const response = await authApi.patch(`/tasks/status/${taskId}`);
+  updateStatus: async (taskId: string, status: string) => {
+    const response = await authApi.patch(`/tasks/status/${taskId}`, { status });
     return response.data;
   },
 

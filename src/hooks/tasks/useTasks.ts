@@ -50,3 +50,21 @@ export const useDeleteTask = () => {
     },
   });
 };
+
+export const useUpdateStatusTask = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["update-status-task"],
+    mutationFn: async (params: { taskId: string; status: string }) => {
+      const response = await TasksService.updateStatus(
+        params.taskId,
+        params.status
+      );
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["get-all-tasks"] });
+    },
+  });
+};

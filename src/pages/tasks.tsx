@@ -33,6 +33,11 @@ export const Tasks = () => {
               Manhã
             </TaskPeriod>
             <div className="space-y-3">
+              {tasksMorning && tasksMorning.length <= 0 && (
+                <p className="text-dark-gray">
+                  Não existem tarefas para o período da manhã.
+                </p>
+              )}
               {tasksMorning?.map((task) => (
                 <TaskItem tasks={task} key={task.id} />
               ))}
@@ -44,6 +49,11 @@ export const Tasks = () => {
               Tarde
             </TaskPeriod>
             <div className="space-y-3">
+              {tasksAfternoon && tasksAfternoon.length <= 0 && (
+                <p className="text-dark-gray">
+                  Não existem tarefas para o período da tarde.
+                </p>
+              )}
               {tasksAfternoon?.map((task) => (
                 <TaskItem tasks={task} key={task.id} />
               ))}
@@ -55,6 +65,11 @@ export const Tasks = () => {
               Noite
             </TaskPeriod>
             <div className="space-y-3">
+              {tasksMorning && tasksMorning.length <= 0 && (
+                <p className="text-dark-gray">
+                  Não existem tarefas para o período da noite.
+                </p>
+              )}
               {tasksEvening?.map((task) => (
                 <TaskItem tasks={task} key={task.id} />
               ))}

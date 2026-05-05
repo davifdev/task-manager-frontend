@@ -1,7 +1,13 @@
 import clsx from "clsx";
-import { ExternalLinkIcon, Trash2Icon } from "lucide-react";
+import {
+  CheckIcon,
+  ExternalLinkIcon,
+  LoaderCircle,
+  Trash2Icon,
+} from "lucide-react";
 import { useId } from "react";
-import { useDeleteTask } from "../../hooks/tasks/useTasks";
+import { useDeleteTask, useUpdateStatusTask } from "../../hooks/tasks/useTasks";
+import { verifyStatus } from "../../helpers/verify-status";
 
 type TaskType = {
   id?: string;
@@ -36,10 +42,16 @@ const TaskItem = ({ tasks }: TaskItemProps) => {
   const checkId = `${id}-checked`;
 
   const deleteTaskMutation = useDeleteTask();
+  const updateStatusTaskMutation = useUpdateStatusTask();
+  const status = verifyStatus(tasks.status);
 
   const handleDeleteClick = async () => {
     console.log(tasks.id);
     await deleteTaskMutation.mutateAsync(tasks.id!);
+  };
+
+  const handleUpdateStatusClick = async () => {
+    await updateStatusTaskMutation.mutateAsync({ taskId: tasks.id!, status });
   };
 
   return (
@@ -47,12 +59,19 @@ const TaskItem = ({ tasks }: TaskItemProps) => {
       <div className="flex items-center gap-3">
         <div
           className={`${checkedVariants[tasks?.status]} flex h-6 w-6 cursor-pointer items-center justify-center rounded-md`}
+          onClick={handleUpdateStatusClick}
         >
           <input
             id={checkId}
             type="checkbox"
-            className="z-10 h-6 w-6 cursor-pointer rounded-md opacity-0"
+            className="absolute top-0 left-0 z-10 h-6 w-6 cursor-pointer rounded-md opacity-0"
           />
+          {tasks.status === "completed" && (
+            <CheckIcon className="text-white" size={18} />
+          )}
+          {tasks.status === "in_progress" && (
+            <LoaderCircle className="animate-spin text-white" size={18} />
+          )}
         </div>
         <p role={checkId}>{tasks?.title}</p>
       </div>

@@ -18,7 +18,6 @@ export const Dashboard = () => {
     return <Navigate to="/" />;
   }
 
-  console.log();
   return (
     <div className="flex">
       <Sidebar />
@@ -34,6 +33,9 @@ export const Dashboard = () => {
               </p>
             </div>
             <div className="space-y-3">
+              {tasks && tasks.length <= 0 && (
+                <p className="text-dark-gray">Nenhuma tarefa foi cadastrada.</p>
+              )}
               {tasks?.map((task) => (
                 <TaskItem tasks={task} key={task.id} />
               ))}
