@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 export const authApi = axios.create({
   baseURL: "http://localhost:3000",
@@ -25,19 +24,22 @@ authApi.interceptors.response.use(
     try {
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
-        const refreshToken = Cookies.get("refreshToken");
+        const refreshToken = localStorage.getItem("refreshToken");
         if (!refreshToken) {
           return Promise.reject(error);
         }
         const response = await authApi.post(refreshToken);
-        const { accessToken: newAccessToken } = response.data;
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+          response.data.tokens;
         localStorage.setItem("accessToken", newAccessToken);
+        localStorage.setItem("refreshToken", newRefreshToken);
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return authApi(originalRequest);
       }
     } catch (error) {
       console.log("removi o token");
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       return Promise.reject(error);
     }
 

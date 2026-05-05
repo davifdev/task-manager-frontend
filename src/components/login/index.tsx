@@ -29,7 +29,7 @@ export const Login = () => {
   const onSubmit = async (data: LoginUserSchemaType) => {
     const response = await signInMutation.mutateAsync(data);
     localStorage.setItem("accessToken", response.accessToken);
-
+    localStorage.setItem("refreshToken", response.refreshToken);
     dispatch(
       signIn({
         email: response.email,

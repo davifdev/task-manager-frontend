@@ -7,19 +7,27 @@ export const UserService = {
   register: async (data: RegisterUserSchemaType): Promise<UserDTO> => {
     const response = await api.post("/register", data);
 
+    const accessToken = response.data.tokens.accessToken;
+    const refreshToken = response.data.tokens.refreshToken;
+
     return {
       username: response.data.username,
       email: response.data.email,
-      accessToken: response.data.accessToken,
+      accessToken,
+      refreshToken,
     };
   },
   login: async (data: LoginUserSchemaType): Promise<UserDTO> => {
     const response = await api.post("/login", data);
 
+    const accessToken = response.data.tokens.accessToken;
+    const refreshToken = response.data.tokens.refreshToken;
+
     return {
       username: response.data.username,
       email: response.data.email,
-      accessToken: response.data.accessToken,
+      accessToken,
+      refreshToken,
     };
   },
 

@@ -34,6 +34,7 @@ export const Register = () => {
   const onSubmit = async (data: RegisterUserSchemaType) => {
     const response = await signUpMutation.mutateAsync(data);
     localStorage.setItem("accessToken", response.accessToken);
+    localStorage.setItem("refreshToken", response.refreshToken);
 
     dispatch(
       signUp({

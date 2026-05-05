@@ -11,7 +11,8 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) return;
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (!accessToken && !refreshToken) return;
 
       const user = await UserService.getUser();
 
