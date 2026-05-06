@@ -5,11 +5,21 @@ import { InputSelect } from "../components/input-select";
 import { Sidebar } from "../components/sidebar";
 
 import { useAppSelector } from "../hooks/redux/useAppSelector";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useDeleteTask, useGetUniqueTask } from "../hooks/tasks/useTasks";
 
 export const EditTask = () => {
   const user = useAppSelector((state) => state.AuthUser);
   const isAuth = user.email.length > 0;
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const task = useGetUniqueTask(id!);
+  const deleteTaskMutation = useDeleteTask();
+
+  const handleDeleteClick = async () => {
+    await deleteTaskMutation.mutateAsync(id!);
+    navigate("/tasks");
+  };
 
   if (!isAuth) {
     return <Navigate to="/" />;
@@ -45,6 +55,7 @@ export const EditTask = () => {
             variant="danger"
             aria-label="Deletar tarefa"
             title="Deletar tarefa"
+            onClick={handleDeleteClick}
           >
             <Trash2Icon size={18} />
             Deletar tarefa
@@ -55,12 +66,18 @@ export const EditTask = () => {
             labelText="Título"
             placeholder="Título da tarefa"
             aria-label="Descrição da tarefa"
+            defaultValue={task.data?.title}
           />
-          <InputSelect labelText="Horário" aria-label="Horário da tarefa" />
+          <InputSelect
+            labelText="Horário"
+            aria-label="Horário da tarefa"
+            defaultValue={task.data?.time}
+          />
           <Input
             labelText="Descrição"
             placeholder="Descrição da tarefa"
             aria-label="Descrição da tarefa"
+            defaultValue={task.data?.description}
           />
         </div>
         <div className="flex items-center justify-end gap-2">

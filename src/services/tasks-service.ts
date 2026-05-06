@@ -25,6 +25,11 @@ export const TasksService = {
     return response.data;
   },
 
+  getUniqueTask: async (taskId: string): Promise<Task> => {
+    const response = await authApi.get(`/tasks/${taskId}`);
+    return response.data;
+  },
+
   create: async (data: Task) => {
     const response = await authApi.post("/tasks", data);
     return response.data;

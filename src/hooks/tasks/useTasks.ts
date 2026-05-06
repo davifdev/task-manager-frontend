@@ -21,6 +21,16 @@ export const useGetAllTasks = () => {
   });
 };
 
+export const useGetUniqueTask = (taskId: string) => {
+  return useQuery({
+    queryKey: ["get-unique-task"],
+    queryFn: async () => {
+      const response = await TasksService.getUniqueTask(taskId);
+      return response;
+    },
+  });
+};
+
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
   return useMutation({

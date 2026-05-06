@@ -8,6 +8,7 @@ import {
 import { useId } from "react";
 import { useDeleteTask, useUpdateStatusTask } from "../../hooks/tasks/useTasks";
 import { verifyStatus } from "../../helpers/verify-status";
+import { Link } from "react-router-dom";
 
 type TaskType = {
   id?: string;
@@ -46,7 +47,6 @@ const TaskItem = ({ tasks }: TaskItemProps) => {
   const status = verifyStatus(tasks.status);
 
   const handleDeleteClick = async () => {
-    console.log(tasks.id);
     await deleteTaskMutation.mutateAsync(tasks.id!);
   };
 
@@ -76,7 +76,9 @@ const TaskItem = ({ tasks }: TaskItemProps) => {
         <p role={checkId}>{tasks?.title}</p>
       </div>
       <div className="flex items-center gap-2">
-        <ExternalLinkIcon size={18} />
+        <Link to={`/tasks/${tasks?.id}`}>
+          <ExternalLinkIcon size={18} />
+        </Link>
         <button className="cursor-pointer" onClick={handleDeleteClick}>
           <Trash2Icon size={18} />
         </button>
