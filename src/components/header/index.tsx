@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../button";
 import { PlusIcon, Trash2Icon } from "lucide-react";
 import { AddTaskDialog } from "../add-task-dialog";
+import { useDeleteManyTask } from "../../hooks/tasks/useTasks";
 
 type HeaderProps = {
   title: string;
@@ -10,9 +11,14 @@ type HeaderProps = {
 
 export const Header = ({ title, subtitle }: HeaderProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const deleteManyTaskMutation = useDeleteManyTask();
 
   const handleToggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
+  };
+
+  const handleDeleteManyTasks = async () => {
+    await deleteManyTaskMutation.mutateAsync();
   };
 
   return (
@@ -26,6 +32,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
           variant="ghost"
           aria-label="Deletar todas as tarefas"
           title="Deletar todas as tarefas"
+          onClick={handleDeleteManyTasks}
         >
           Limpar tarefas
           <Trash2Icon size={18} />

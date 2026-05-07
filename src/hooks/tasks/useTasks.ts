@@ -61,6 +61,20 @@ export const useDeleteTask = () => {
   });
 };
 
+export const useDeleteManyTask = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["delete-all-task"],
+    mutationFn: async () => {
+      const response = TasksService.deleteMany();
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-tasks"] });
+    },
+  });
+};
+
 export const useUpdateStatusTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -75,6 +89,23 @@ export const useUpdateStatusTask = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-tasks"] });
       queryClient.invalidateQueries({ queryKey: ["get-all-tasks"] });
+    },
+  });
+};
+
+type UpdateTaskType = {
+  title: string;
+  description: string;
+  status: string;
+  time: string;
+};
+
+export const useUpdateTask = () => {
+  return useMutation({
+    mutationKey: ["update-task"],
+    mutationFn: async (params: { taskId: string; data: UpdateTaskType }) => {
+      const response = await TasksService.update(params.taskId, params.data);
+      return response;
     },
   });
 };

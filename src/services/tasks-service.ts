@@ -1,8 +1,9 @@
 import type { TaskDTO } from "../dtos/tasks/tasks.dto";
 import { authApi } from "../lib/axios";
+import type { TasksSchemaType } from "../schemas/tasks/tasks.schema";
 
 export type Task = {
-  id: string;
+  id?: string;
   title: string;
   time: string;
   status: string;
@@ -12,7 +13,6 @@ export type Task = {
 export const TasksService = {
   getTasks: async (): Promise<TaskDTO> => {
     const response = await authApi.get("/tasks");
-    console.log(response.data);
     return {
       morning: response.data.morning,
       afternoon: response.data.afternoon,
@@ -35,8 +35,8 @@ export const TasksService = {
     return response.data;
   },
 
-  update: async (taskId: string) => {
-    const response = await authApi.put(`/tasks/${taskId}`);
+  update: async (taskId: string, data: TasksSchemaType) => {
+    const response = await authApi.put(`/tasks/${taskId}`, data);
     return response.data;
   },
 
@@ -47,7 +47,6 @@ export const TasksService = {
 
   delete: async (taskId: string) => {
     const response = await authApi.delete(`/tasks/${taskId}`);
-    console.log(response);
     return response.data;
   },
 

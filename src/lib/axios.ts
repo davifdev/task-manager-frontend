@@ -28,7 +28,7 @@ authApi.interceptors.response.use(
         if (!refreshToken) {
           return Promise.reject(error);
         }
-        const response = await authApi.post(refreshToken);
+        const response = await authApi.post("/refresh-token", { refreshToken });
         const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
           response.data.tokens;
         localStorage.setItem("accessToken", newAccessToken);
